@@ -2,18 +2,22 @@
   <nav class="fixed w-full top-0 left-0 bg-white">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <!-- ou mettre un icon  -->
-      <a href="#" class="text-xl font-bold text-blue-600">Nom Projet a definir</a>
+      <a routerLink="" class="text-xl font-bold text-blue-600">Nom Projet a definir</a>
       <div class="space-x-6">
-        <a href="#" class="text-gray-700 hover:text-blue-600">Accueil</a>
-        <a href="#" class="text-gray-700 hover:text-blue-600">Profil</a>
-        <a href="#" class="text-gray-700 hover:text-blue-600">Recherche</a>
-        <a href="#" class="text-gray-700 hover:text-blue-600">Contact</a>
+        <a routerLink="" class="text-gray-700 hover:text-blue-600">Accueil</a>
+        <a routerLink="/profil"class="text-gray-700 hover:text-blue-600">Profil</a>
+        <!-- RAJOUTER LA RECHERCHE -->
+        <a routerLink="" class="text-gray-700 hover:text-blue-600">Recherche</a>
+        <a routerLink="/contact-us" class="text-gray-700 hover:text-blue-600">Contact</a>
+        <!-- RAJOUTER LA LISTE D'AMIS -->
         <a href="#" class="text-gray-700 hover:text-blue-600">Amis</a>
       </div>
       <!-- il va falloir un ngif pour si la personne est connéct, ça devient se déco-->
-      <a href="#" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700">
+      <a routerLink="/login" class="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-700">
         Login / Register
       </a>
     </div>
   </nav>
 </header>
+
+<router-outlet></router-outlet>   
