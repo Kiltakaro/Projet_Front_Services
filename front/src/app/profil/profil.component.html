@@ -1,1 +1,9 @@
-<p>profil works!</p>
+<div id="userinfo" class="grid place-items-center h-screen bg-gray-100">
+    <div id="userinfo-center" class="bg-blue-100 px-10 py-10 rounded-xl">
+        <h1 class="text-3xl font-semibold py-4">Voici votre profil !</h1>
+        <p class="font-medium py-4">Username : <em class="font-normal">{{ username }}</em></p>
+        <p class="font-medium py-4">Adresse mail : <em class="font-normal">{{ email }}</em></p>
+        <p class="font-medium py-4">Mot de passe : <em style="-webkit-text-security: disc;">{{ password }}</em></p>
+        <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline">Modifier mot de passe</button>
+    </div>
+</div>
