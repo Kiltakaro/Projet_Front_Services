@@ -1,1 +1,38 @@
-<p>contact works!</p>
+<div class="flex justify-center items-center h-screen">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-2">Nous contacter</h2>
+        <form id="contact-form">
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="name">
+                    Nom
+                </label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="name" type="text" placeholder="Entrez votre nom" required>
+                <p class="text-red-500 hidden" id="name-error">Ce champ est obligatoire.</p>
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2" for="email">
+                    Adresse e-mail
+                </label>
+                <input
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="email" type="email" placeholder="Entrez votre adresse e-mail" required>
+                <p class="text-red-500 hidden" id="email-error">Ce champ est obligatoire.</p>
+            </div>
+            <div class="mb-4">
+                <textarea 
+                    class="shadow appearance-none border rounded w-full h-32 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id=message placeholder="Votre message..." required></textarea>
+                    <p class="text-red-500 hidden" id="message-error">Ce champ est obligatoire.</p>
+            </div>
+            <div class="flex justify-center mt-4">
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    type="submit">
+                    Envoyer
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
