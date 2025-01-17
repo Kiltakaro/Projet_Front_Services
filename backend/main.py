@@ -1,5 +1,19 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import requests
+import psycopg2
+from psycopg2 import sql
+from pydantic import BaseModel
+from typing import List
+from userModel import UserBaseModel
+
+# Configuration PostgreSQL
+DB_CONFIG = {
+    'dbname': 'database',
+    'user': 'user',
+    'password': 'password',
+    'host': 'localhost',
+    'port': 5432
+}
 
 ### Token ###
 headers = {
@@ -29,6 +43,50 @@ def get_genre_id(genre_name):
             return genre["id"]
     return None
 
+def get_db_connection():
+    """Crée et retourne une connexion à la base de données PostgreSQL."""
+    try:
+        connection = psycopg2.connect(**DB_CONFIG)
+        return connection
+    except Exception as e:
+        print(f"Erreur de connexion à la base de données : {e}")
+        return None
+    
+
+# Endpoint pour enregistrer un utilisateur
+@app.post("/register")
+def register(user: UserBaseModel):
+    username = user.username
+    email = user.email
+    password = user.password
+
+    if not username or not email or not password:
+        raise HTTPException(status_code=400, detail="Tous les champs sont requis")
+
+    connection = get_db_connection()
+    if not connection:
+        raise HTTPException(status_code=500, detail="Erreur de connexion à la base de données")
+
+    try:
+        with connection.cursor() as cursor:
+            query = sql.SQL("""
+                INSERT INTO "User" (username, email, password)
+                VALUES (%s, %s, %s) RETURNING id, username, email;
+            """)
+            cursor.execute(query, (username, email, password))
+            connection.commit()
+            user = cursor.fetchone()
+
+            return {"message": "Utilisateur créé", "user": {"id": user[0], "username": user[1], "email": user[2]}}
+
+    except Exception as e:
+        print(f"Erreur lors de l'insertion : {e}")
+        raise HTTPException(status_code=500, detail="Erreur serveur")
+    finally:
+        connection.close()
+
+
+
 
 # Est ce qu'on considere le cas ou les 3 ont des gouts différents ? 
 # Ma vision c'est on regarde les genres et en fonction de si au moins 50% aiment ce genre, on va pouvoir proposer des films avec ce genre.
@@ -53,5 +111,3 @@ def find_movie_with_genres():
     return {"message": "Hello, World!", "request_genre": response.json()}
 
 
-
-#@app.get("/signup"):
