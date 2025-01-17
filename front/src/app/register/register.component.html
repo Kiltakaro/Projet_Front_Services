@@ -4,40 +4,20 @@
         <h2 class="text-2xl font-bold mb-2">Créer un compte</h2>
         <a class="text-gray-600 font-bold mb-2" href="#">Se connecter</a>
       </div>
-      <form id="registration-form">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="mb-4">
-          <label class="block text-gray-700 font-bold mb-2" for="name">
-            Nom complet
-          </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Entrez votre nom" required>
-          <p class="text-red-500 hidden" id="name-error">Ce champ est obligatoire.</p>
+          <label for="username" class="block text-gray-700 font-bold mb-2">Nom complet</label>
+          <input formControlName="username" type="text" id="username" placeholder="Entrez votre nom" class="input" />
         </div>
         <div class="mb-4">
-          <label class="block text-gray-700 font-bold mb-2" for="email">
-            Adresse e-mail
-          </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Entrez votre adresse e-mail" required>
-          <p class="text-red-500 hidden" id="email-error">Ce champ est obligatoire.</p>
+          <label for="email" class="block text-gray-700 font-bold mb-2">Adresse e-mail</label>
+          <input formControlName="email" type="email" id="email" placeholder="Entrez votre email" class="input" />
         </div>
         <div class="mb-6">
-          <label class="block text-gray-700 font-bold mb-2" for="password">
-            Mot de passe
-          </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="Entrez votre mot de passe" required>
-          <p class="text-red-500 hidden" id="password-error">Ce champ est obligatoire.</p>
+          <label for="password" class="block text-gray-700 font-bold mb-2">Mot de passe</label>
+          <input formControlName="password" type="password" id="password" placeholder="Entrez votre mot de passe" class="input" />
         </div>
-        <div class="flex items-center mb-6">
-          <input class="form-checkbox h-4 w-4 text-blue-500 rounded focus:ring-blue-500" type="checkbox" id="cgu-checkbox" required>
-          <label class="ml-2 text-gray-700 font-medium" for="cgu-checkbox">
-            J'ai lu et j'accepte les <a href="#" class="text-blue-500 hover:text-blue-700">CGU</a>
-          </label>
-          <p class="text-red-500 hidden" id="cgu-error">Vous devez accepter les CGU pour vous inscrire.</p>
-        </div>
-        <div class="flex justify-center mt-4">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-            S'inscrire
-          </button>
-        </div>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">S'inscrire</button>
       </form>
     </div>
   </div>
