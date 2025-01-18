@@ -1,3 +1,14 @@
+# Pour lancer le backend
+uvicorn main:app --reload
+uvicorn main:app --reload
+
+
+# Pour Restart le docker 
+docker-compose down && docker-compose build --no-cache && docker-compose up --force-recreate
+
+
+docker-compose down && docker-compose build frontend --no-cache && docker-compose up --force-recreate frontend
+
 
 Brice key : 
 eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhMDE3YTQ5ZDJmNmJkMzVmNGUzNGZiMWU0OTM0ZTA5YiIsIm5iZiI6MTczNzEwNTE4My4zODQsInN1YiI6IjY3OGExZjFmYTY0ZmViMTZjOTFkN2M0MSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.yETupyK0LYVCDm4-n2UESuzjAORbGIlFffqXaoxN24U

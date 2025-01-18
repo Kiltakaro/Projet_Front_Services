@@ -1,0 +1,56 @@
+services:
+
+  database:
+    build: ./database
+    container_name: database
+    environment:
+      POSTGRES_DB: gpsDb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST_AUTH_METHOD: trust
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./Database/db_postgres.sql:/docker-entrypoint-initdb.d/db_postgres.sql
+    networks:
+      - app-network
+
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    networks:
+      - app-network
+    dns: # sert a bypass un bug a cause du setup du reseau de l'école
+      - 8.8.8.8
+      - 8.8.4.4
+    restart: on-failure
+    # tty: true # pratique pour debug
+
+  front:
+    build: ./front
+    container_name: front
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
+    networks :
+      - app-network
+    dns: # sert a bypass un bug a cause du setup du reseau de l'école
+      - 8.8.8.8
+      - 8.8.4.4
+    restart: on-failure
+    # tty: true
+
+  
+volumes:
+  db_data:
+
+networks:
+  app-network:
+    driver: bridge
